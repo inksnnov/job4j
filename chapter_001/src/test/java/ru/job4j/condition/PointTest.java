@@ -18,4 +18,5 @@ public class PointTest {
         double expect = 2.23606797749979;
         assertThat(pointA.distanceTo(pointB), closeTo(expect, 0));
     }
+
 }
