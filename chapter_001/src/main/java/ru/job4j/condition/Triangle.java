@@ -58,7 +58,7 @@ public class Triangle {
      */
     private boolean exist(double a, double b, double c) {
         boolean result = false;
-        if (a + b > c || a + c > b || b + c > a && a >= 0 && b >= 0 && c >= 0) {
+        if (a + b > c && a + c > b && b + c > a) {
             result = true;
         }
         return result;
