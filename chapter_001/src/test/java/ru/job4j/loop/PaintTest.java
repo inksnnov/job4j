@@ -15,6 +15,28 @@ import static org.junit.Assert.assertThat;
 public class PaintTest {
 
     @Test
+    public void leftTrlTestOne() {
+        Paint paint = new Paint();
+        String result = paint.leftTrl(3);
+        assertThat(result, is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                .add("  ^")
+                .add(" ^^")
+                .add("^^^")
+                .toString()));
+    }
+
+    @Test
+    public void rightTrlTestOne() {
+        Paint paint = new Paint();
+        String result = paint.rightTrl(3);
+        assertThat(result, is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                .add("^  ")
+                .add("^^ ")
+                .add("^^^")
+                .toString()));
+    }
+
+    @Test
     public void pyramidTest() {
         Paint paint = new Paint();
         String result = paint.pyramid(3);
