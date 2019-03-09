@@ -12,14 +12,14 @@ public class DummyBot {
     /**
      * Метод глупого бота.
      *
-     * @param qwestion String - входящее сообщение.
+     * @param question String - входящее сообщение.
      * @return String - ответ.
      */
-    public String answert(String qwestion) {
+    public String answert(String question) {
         String result = "Это ставит меня в тупик,задайте другой вопрос.";
-        if (qwestion.equals("Привет Бот.")) {
+        if (question.equals("Привет Бот.")) {
             result = "Привет, умник.";
-        } else if (qwestion.equals("Пока.")) {
+        } else if (question.equals("Пока.")) {
             result = "До скорой встречи.";
         }
         return result;

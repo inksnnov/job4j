@@ -17,9 +17,9 @@ public class Matrix {
      */
     public int[][] multiple(int size) {
         int[][] result = new int[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                result[i][j] = (i + 1) * (j + 1);
+        for (int row = 0; row < size; row++) {
+            for (int cell = 0; cell < size; cell++) {
+                result[row][cell] = (row + 1) * (cell + 1);
             }
         }
         return result;

@@ -16,10 +16,10 @@ public class Turn {
      * @return int[] перевернутый массив.
      */
     public int[] back(int[] input) {
-        for (int i = 0; i < input.length / 2; i++) {
-            int temp = input[i];
-            input[i] = input[input.length - i - 1];
-            input[input.length - i - 1] = temp;
+        for (int cell = 0; cell < input.length / 2; cell++) {
+            int temp = input[cell];
+            input[cell] = input[input.length - cell - 1];
+            input[input.length - cell - 1] = temp;
         }
         return input;
     }

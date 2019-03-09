@@ -19,11 +19,11 @@ public class ArrayDuplicate {
      */
     public String[] remote(String[] array) {
         int count = 0;
-        for (int i = 0; i < array.length - 1 - count; i++) {
-            for (int j = 1 + i; j < array.length - count; j++) {
-                if (array[i].equals(array[j])) {
-                    String tmp = array[j];
-                    array[j] = array[array.length - 1 - count];
+        for (int row = 0; row < array.length - 1 - count; row++) {
+            for (int cell = 1 + row; cell < array.length - count; cell++) {
+                if (array[row].equals(array[cell])) {
+                    String tmp = array[cell];
+                    array[cell] = array[array.length - 1 - count];
                     array[array.length - 1 - count] = tmp;
                     count++;
                 }
