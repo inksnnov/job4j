@@ -6,5 +6,13 @@ package ru.job4j.inheritance;
  * @since 11.03.19.
  */
 public class Patient {
-    public String name;
+    private String name;
+
+    public Patient(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
