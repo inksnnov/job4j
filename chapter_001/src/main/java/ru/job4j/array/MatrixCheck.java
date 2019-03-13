@@ -20,8 +20,8 @@ public class MatrixCheck {
     public boolean mono(boolean[][] data) {
         boolean result = true;
         for (int index = 0; index < data.length - 1; index++) {
-            if (data[index][index] != data[index + 1][index + 1] ||
-                    data[index][data.length - 1 - index] != data[index + 1][data.length - 2 - index]) {
+            if (data[index][index] != data[index + 1][index + 1]
+                    || data[index][data.length - 1 - index] != data[index + 1][data.length - 2 - index]) {
                 result = false;
                 break;
             }
