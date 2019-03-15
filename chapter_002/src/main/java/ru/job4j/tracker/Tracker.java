@@ -36,6 +36,7 @@ public class Tracker {
 
     /**
      * Метод заменяет созданную ранее заявку в массиве items.
+     * Id берем из заменяемой заявки.
      *
      * @param id   заявки которую  нужно заменить.
      * @param item Объект новой заявки.
@@ -45,7 +46,7 @@ public class Tracker {
         boolean result = false;
         for (int i = 0; i < position; i++) {
             if (items[i] != null && items[i].getId().equals(id)) {
-                item.setId(this.generateId());
+                item.setId(id);
                 items[i] = item;
                 result = true;
                 break;
