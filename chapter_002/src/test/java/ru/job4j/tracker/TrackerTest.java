@@ -67,10 +67,17 @@ public class TrackerTest {
         long create = System.currentTimeMillis();
         Item itemOne = new Item("NameOne", "DescOne", create);
         Item itemTwo = new Item("NameTwo", "DescTwo", create);
+        Item itemThree = new Item("NameThree", "Three", create);
+        Item itemFour = new Item("NameThree", "Three", create);
+        Item itemFive = new Item("NameThree", "Three", create);
         tracker.add(itemOne);
         tracker.add(itemTwo);
-        Item result = tracker.findByName(itemTwo.getName());
-        assertThat(itemTwo, is(result));
+        tracker.add(itemThree);
+        tracker.add(itemFour);
+        tracker.add(itemFive);
+        Item[] result = tracker.findByName(itemThree.getName());
+        Item[] expect = {itemThree, itemFour, itemFive};
+        assertThat(expect, is(result));
     }
 
     @Test

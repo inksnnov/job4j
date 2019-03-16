@@ -30,7 +30,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[position++] = item;
+        this.items[this.position++] = item;
         return item;
     }
 
@@ -44,10 +44,10 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for (int i = 0; i < position; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i] != null && this.items[i].getId().equals(id)) {
                 item.setId(id);
-                items[i] = item;
+                this.items[i] = item;
                 result = true;
                 break;
             }
@@ -65,11 +65,11 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int i = 0; i < position; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                System.arraycopy(items, i + 1, items, i, items.length - i - 1);
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i] != null && this.items[i].getId().equals(id)) {
+                System.arraycopy(this.items, i + 1, this.items, i, this.items.length - i - 1);
                 result = true;
-                position--;
+                this.position--;
                 break;
             }
         }
@@ -82,24 +82,25 @@ public class Tracker {
      * @return Возващает массив без null элементов и без стертых заявок.
      */
     public Item[] findAll() {
-        return Arrays.copyOf(items, position);
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**
      * Поиск заявки по имени.
      *
      * @param name имя искомой заявки.
-     * @return найденная заявка, иначе null.
+     * @return Item[] массив заявок с искомыми именами.
      */
-    public Item findByName(String name) {
-        Item result = null;
-        for (int i = 0; i < position; i++) {
-            if (items[i] != null && items[i].getName().equals(name)) {
-                result = items[i];
-                break;
+    public Item[] findByName(String name) {
+        int count = 0;
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i] != null && this.items[i].getName().equals(name)) {
+                Item tmp = this.items[count];
+                this.items[count++] = this.items[i];
+                this.items[i] = tmp;
             }
         }
-        return result;
+        return Arrays.copyOf(this.items, count);
     }
 
     /**
@@ -110,9 +111,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (int i = 0; i < position; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                result = items[i];
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i] != null && this.items[i].getId().equals(id)) {
+                result = this.items[i];
                 break;
             }
         }
