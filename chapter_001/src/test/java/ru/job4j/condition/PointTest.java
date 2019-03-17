@@ -1,22 +1,33 @@
 package ru.job4j.condition;
 
 import org.junit.Test;
-
-import static org.hamcrest.number.IsCloseTo.closeTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * @author Alexandr Khomichevskiy.
- * @version 1.0.
- * @since 25.02.19.
- */
 public class PointTest {
     @Test
-    public void pointTestOne() {
-        Point pointA = new Point(1, 4);
-        Point pointB = new Point(2, 2);
-        double expect = 2.23606797749979;
-        assertThat(pointA.distanceTo(pointB), closeTo(expect, 0));
+    public void whenZeroAndTenThenTen() {
+        Point first = new Point(0, 0);
+        Point second = new Point(0, 10);
+        double result = first.distanceTo(second);
+        first.info();
+        second.info();
+        System.out.println(String.format("Result is %s", result));
+        assertThat(result, is(10D));
     }
 
+    @Test
+    public void whenCheckItself() {
+        Point point = new Point(0, 0);
+        double result = point.distanceTo(point);
+        assertThat(result, is(0D));
+    }
+
+    @Test
+    public void whenShowInfo() {
+        Point first = new Point(1, 1);
+        first.info();
+        Point second = new Point(2, 2);
+        second.info();
+    }
 }
