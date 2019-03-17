@@ -14,23 +14,34 @@ public class TriangleTest {
 
     @Test
     public void triTestOne() {
-        Triangle triangle = new Triangle();
-        double result = triangle.area(0, 0, 0, 2, 2, 0);
+        Point pointA = new Point(0, 0);
+        Point pointB = new Point(0, 2);
+        Point pointC = new Point(2, 0);
+        Triangle triangle = new Triangle(pointA, pointB, pointC);
+        double result = triangle.area();
         double expect = 2D;
         assertThat(result, closeTo(expect, 0.1));
     }
 
     @Test
     public void triTestTwo() {
-        Triangle triangle = new Triangle();
-        double result = triangle.area(2, 2, 2, 2, 2, 2);
-        assertThat(result, closeTo(-1, 0));
+        Point pointA = new Point(0, 0);
+        Point pointB = new Point(0, 0);
+        Point pointC = new Point(0, 0);
+        Triangle triangle = new Triangle(pointA, pointB, pointC);
+        double result = triangle.area();
+        double expect = -1D;
+        assertThat(result, closeTo(expect, 0));
     }
 
     @Test
     public void triTestThree() {
-        Triangle triangle = new Triangle();
-        double result = triangle.area(0, 0, 2, 2, 2, 2);
-        assertThat(result, closeTo(-1, 0));
+        Point pointA = new Point(0, 0);
+        Point pointB = new Point(2, 2);
+        Point pointC = new Point(2, 2);
+        Triangle triangle = new Triangle(pointA, pointB, pointC);
+        double result = triangle.area();
+        double expect = -1D;
+        assertThat(result, closeTo(expect, 0));
     }
 }

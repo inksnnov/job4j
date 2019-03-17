@@ -9,6 +9,16 @@ package ru.job4j.condition;
  */
 public class Triangle {
 
+    private Point pointOne;
+    private Point pointTwo;
+    private Point pointThree;
+
+    public Triangle(Point a, Point b, Point c) {
+        this.pointOne = a;
+        this.pointTwo = b;
+        this.pointThree = c;
+    }
+
     /**
      * Метод вычисляет полупериметр по длиннам сторон треугольника.
      *
@@ -24,19 +34,10 @@ public class Triangle {
     /**
      * Метод вычисляет площадь треугольника.
      *
-     * @param x1 int координата точки a оси x.
-     * @param y1 int координата точки a оси y.
-     * @param x2 int координата точки b оси x.
-     * @param y2 int координата точки b оси y.
-     * @param x3 int координата точки c оси x.
-     * @param y3 int координата точки c оси y.
      * @return double площадь треугольника.
      */
-    public double area(int x1, int y1, int x2, int y2, int x3, int y3) {
+    public double area() {
         double result = -1;
-        Point pointOne = new Point(x1, y1);
-        Point pointTwo = new Point(x2, y2);
-        Point pointThree = new Point(x3, y3);
         double a = pointOne.distanceTo(pointTwo);
         double b = pointTwo.distanceTo(pointThree);
         double c = pointOne.distanceTo(pointThree);
