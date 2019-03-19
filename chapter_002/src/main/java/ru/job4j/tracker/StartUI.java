@@ -109,17 +109,13 @@ public class StartUI {
     private void replaceItem() {
         System.out.println("-------------Редактирование заявки------------");
         String id = this.input.ask("Введите ID редактируемой заявки :");
-        if (this.tracker.findById(id) != null) {
-            String name = this.input.ask("Введите новое имя заявки.");
-            String desc = this.input.ask("Введите новое описание к заявке.");
-            Item item = new Item(name, desc, this.setTime());
-            if (this.tracker.replace(id, item)) {
-                System.out.println("Заявка успешно отредактирована.");
-            } else {
-                System.out.println("Заявка не отредактирована, попробуйте снова.");
-            }
+        String name = this.input.ask("Введите новое имя заявки.");
+        String desc = this.input.ask("Введите новое описание к заявке.");
+        Item item = new Item(name, desc, this.setTime());
+        if (this.tracker.replace(id, item)) {
+            System.out.println("Заявка успешно отредактирована.");
         } else {
-            System.out.println("Введен неверный ID.");
+            System.out.println("Заявка не отредактирована, попробуйте снова.");
         }
     }
 
@@ -129,14 +125,10 @@ public class StartUI {
     private void deleteItem() {
         System.out.println("------------Удаление заявки------------");
         String id = this.input.ask("Введите ID удаляемой заявки.");
-        if (this.tracker.findById(id) != null) {
-            if (this.tracker.delete(id)) {
-                System.out.println("Заявка удалена.");
-            } else {
-                System.out.println("Заявка не удалена, попробуйте снова.");
-            }
+        if (this.tracker.delete(id)) {
+            System.out.println("Заявка удалена.");
         } else {
-            System.out.println("Введен неверный ID.");
+            System.out.println("Заявка не удалена, попробуйте снова.");
         }
     }
 
@@ -172,6 +164,8 @@ public class StartUI {
         Item item = this.tracker.findById(id);
         if (item != null) {
             this.formatOut(item.getName(), item.getDesc());
+        } else {
+            System.out.println("Заявка не найдена, укажите верный ID.");
         }
     }
 
