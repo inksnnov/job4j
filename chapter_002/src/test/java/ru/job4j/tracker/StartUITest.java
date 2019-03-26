@@ -34,7 +34,7 @@ public class StartUITest {
     @Test
     public void createItemTestOne() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "testName", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "testName", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("testName"));
     }
@@ -42,13 +42,12 @@ public class StartUITest {
     private String showMenu() {
         String ln = System.lineSeparator();
         return new StringBuilder()
-                .append("Меню").append(ln)
                 .append("0 - Добавление заявки.").append(ln)
                 .append("1 - Замена заявки.").append(ln)
                 .append("2 - Удаление заявки.").append(ln)
                 .append("3 - Показать все заявки.").append(ln)
-                .append("4 - Поиск заявки по имени.").append(ln)
-                .append("5 - Поиск заявки по Id.").append(ln)
+                .append("4 - Поиск заявок по имени.").append(ln)
+                .append("5 - Поиск заявки по ID.").append(ln)
                 .append("6 - Выход из программы.").append(ln)
                 .toString();
     }
@@ -61,7 +60,7 @@ public class StartUITest {
         Item itemTwo = new Item("NameTwo", "DescTwo", create);
         tracker.add(itemOne);
         tracker.add(itemTwo);
-        Input input = new StubInput(new String[]{"1", itemTwo.getId(), "NameThree", "DescThree", "6"});
+        Input input = new StubInput(new String[]{"1", itemTwo.getId(), "NameThree", "DescThree", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findByName("NameThree")[0].getName(), is("NameThree"));
     }
@@ -74,7 +73,7 @@ public class StartUITest {
         Item itemTwo = new Item("NameTwo", "DescTwo", create);
         tracker.add(itemOne);
         tracker.add(itemTwo);
-        Input input = new StubInput(new String[]{"2", itemTwo.getId(), "6"});
+        Input input = new StubInput(new String[]{"2", itemTwo.getId(), "y"});
         new StartUI(input, tracker).init();
         assertNull(tracker.findById(itemTwo.getId()));
     }
@@ -88,7 +87,7 @@ public class StartUITest {
         tracker.add(itemOne);
         tracker.add(itemTwo);
         String ln = System.lineSeparator();
-        Input input = new StubInput(new String[]{"3", "6"});
+        Input input = new StubInput(new String[]{"3", "y"});
         new StartUI(input, tracker).init();
         assertThat(out.toString(), is(new StringBuilder()
                 .append(this.showMenu())
@@ -105,7 +104,6 @@ public class StartUITest {
                 .append(ln)
                 .append(" ")
                 .append(ln)
-                .append(this.showMenu())
                 .toString()
         ));
     }
@@ -119,7 +117,7 @@ public class StartUITest {
         tracker.add(itemOne);
         tracker.add(itemTwo);
         String ln = System.lineSeparator();
-        Input input = new StubInput(new String[]{"4", "NameOne", "6"});
+        Input input = new StubInput(new String[]{"4", "NameOne", "y"});
         new StartUI(input, tracker).init();
         assertThat(out.toString(), is(new StringBuilder()
                 .append(this.showMenu())
@@ -130,7 +128,6 @@ public class StartUITest {
                 .append(ln)
                 .append(" ")
                 .append(ln)
-                .append(this.showMenu())
                 .toString()
         ));
     }
@@ -144,7 +141,7 @@ public class StartUITest {
         tracker.add(itemOne);
         tracker.add(itemTwo);
         String ln = System.lineSeparator();
-        Input input = new StubInput(new String[]{"5", itemTwo.getId(), "6"});
+        Input input = new StubInput(new String[]{"5", itemTwo.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(out.toString(), is(new StringBuilder()
                 .append(this.showMenu())
@@ -155,7 +152,6 @@ public class StartUITest {
                 .append(ln)
                 .append(" ")
                 .append(ln)
-                .append(this.showMenu())
                 .toString()
         ));
     }
