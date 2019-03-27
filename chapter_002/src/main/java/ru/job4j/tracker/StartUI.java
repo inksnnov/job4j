@@ -5,7 +5,6 @@ package ru.job4j.tracker;
  *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
- * @since 18.03.19.
  */
 public class StartUI {
 
@@ -20,23 +19,39 @@ public class StartUI {
     private final Tracker tracker;
 
     /**
+     * Поле выхода из программы в методе {@link StartUI#init()}.
+     */
+    private boolean exitStatus = true;
+
+    /**
      * Конструктор инициализирующий поля.
      *
-     * @param input   получение данных от  пользователя.
-     * @param tracker хранение и обработка заявок.
+     * @param input   {@link StartUI#input}.
+     * @param tracker {@link StartUI#tracker}.
      */
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
 
+    /**
+     * Основной метод.
+     * Показывает пользователю меню и запрашивает действие.
+     */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillActions();
+        menu.fillActions(this);
         do {
             menu.show();
             menu.select(Integer.valueOf(input.ask("select:")));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (exitStatus);
+    }
+
+    /**
+     * Смена состояния поля {@link StartUI#exitStatus} для выхода из программы.
+     */
+    public void exit() {
+        this.exitStatus = false;
     }
 
     /**

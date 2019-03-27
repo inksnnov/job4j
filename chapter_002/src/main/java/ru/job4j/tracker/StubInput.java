@@ -1,9 +1,10 @@
 package ru.job4j.tracker;
 
 /**
+ * Реализация интерфейса {@link UserAction}, для иммитации ввода с консоли.
+ *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
- * @since 19.03.19.
  */
 public class StubInput implements Input {
 

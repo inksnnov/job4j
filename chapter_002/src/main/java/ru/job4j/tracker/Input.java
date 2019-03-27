@@ -1,9 +1,10 @@
 package ru.job4j.tracker;
 
 /**
+ * Интерфейс пользовательского ввода и иммитации ввода для тестов.
+ *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
- * @since 18.03.19.
  */
 public interface Input {
 
