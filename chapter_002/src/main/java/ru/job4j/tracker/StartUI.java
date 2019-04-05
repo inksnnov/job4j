@@ -41,9 +41,10 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions(this);
+        int[] ranges = menu.getMenuRange();
         do {
             menu.show();
-            menu.select(Integer.valueOf(input.ask("select:")));
+            menu.select(input.ask("select:", ranges));
         } while (exitStatus);
     }
 
@@ -58,6 +59,6 @@ public class StartUI {
      * Точка входа в программу.
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }

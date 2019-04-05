@@ -38,6 +38,19 @@ public class MenuTracker {
     }
 
     /**
+     * Метод возвращает количество пунктов в меню.
+     *
+     * @return int[] массив пунктов меню.
+     */
+    public int[] getMenuRange() {
+        int[] ranges = new int[this.actions.size()];
+        for (int i = 0; i < this.actions.size(); i++) {
+            ranges[i] = i;
+        }
+        return ranges;
+    }
+
+    /**
      * Добавление объектов меню в список.
      *
      * @param ui {@link StartUI}.
