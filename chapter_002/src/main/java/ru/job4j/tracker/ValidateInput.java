@@ -1,16 +1,41 @@
 package ru.job4j.tracker;
 
 /**
- * Класс пользовательского ввода с обработкой исключений.
+ * Декоратор пользовательского ввода с обработкой исключений.
  *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
 
     /**
-     * Переопределенный метод пользовательского ввода с обработкой исключений
-     * при неверном вводе.
+     * Объект типа Input.
+     */
+    private Input input;
+
+    /**
+     * Конструктор принимает объект Input и записывает в поле input;
+     *
+     * @param input Input.
+     */
+    public ValidateInput(Input input) {
+        this.input = input;
+    }
+
+    /**
+     * Переопределенный и перегруженный метод ask.Для консольного ввода.
+     *
+     * @param question задаем вопрос пользователю.
+     * @return пользовательский ввод.
+     */
+    @Override
+    public String ask(String question) {
+        return this.input.ask(question);
+    }
+
+    /**
+     * Переопределенный и перегруженный метод пользовательского ввода с обработкой исключений
+     * при неверном вводе.Служит для корректного выбора пункта меню.
      *
      * @param question String Вопрос пользователю.
      * @param range    int[]  массив элементов меню.
@@ -22,7 +47,7 @@ public class ValidateInput extends ConsoleInput {
         int value = -1;
         do {
             try {
-                value = super.ask(question, range);
+                value = this.input.ask(question, range);
                 invalid = false;
             } catch (MenuOutException moe) {
                 System.out.println("Введите пункт меню из диапазона значений.");
