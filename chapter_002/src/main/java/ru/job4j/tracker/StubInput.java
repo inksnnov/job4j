@@ -22,7 +22,7 @@ public class StubInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) throws MenuOutException {
+    public int ask(String question, int[] range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {
@@ -31,10 +31,9 @@ public class StubInput implements Input {
                 break;
             }
         }
-        if (exist) {
-            return key;
-        } else {
-            throw new MenuOutException("Некорректный пункт меню, повторите ввод.");
+        if (!exist) {
+            throw new MenuOutException();
         }
+        return key;
     }
 }

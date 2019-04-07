@@ -44,10 +44,9 @@ public class ConsoleInput implements Input {
                 break;
             }
         }
-        if (exist) {
-            return key;
-        } else {
-            throw new MenuOutException("Некорректный пункт меню, повторите ввод.");
+        if (!exist) {
+            throw new MenuOutException();
         }
+        return key;
     }
 }
