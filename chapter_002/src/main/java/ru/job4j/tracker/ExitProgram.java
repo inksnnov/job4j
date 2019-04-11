@@ -6,7 +6,7 @@ package ru.job4j.tracker;
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
  */
-public class ExitProgram implements UserAction {
+public class ExitProgram extends BaseAction {
 
     /**
      * Поле объекта {@link StartUI} для вызова метода {@link StartUI#exit()}.
@@ -14,41 +14,26 @@ public class ExitProgram implements UserAction {
     private final StartUI ui;
 
     /**
-     * Конструктор инициализации поля {@link ExitProgram#ui}.
+     * Конструктор передает объект {@link StartUI} для реализации выхода из программы.
+     * Инициализирует поля key и name.
      *
-     * @param ui
+     * @param key  номер пункта меню.
+     * @param name описание пункта меню.
+     * @param ui   {@link StartUI}.
      */
-    public ExitProgram(StartUI ui) {
+    public ExitProgram(int key, String name, StartUI ui) {
+        super(key, name);
         this.ui = ui;
     }
 
     /**
-     * Ключ меню.
-     *
-     * @return int ключ.
-     */
-    @Override
-    public int key() {
-        return 6;
-    }
-
-    /**
      * Выход из программы.
-     * @param input {@link Input}.
+     *
+     * @param input   {@link Input}.
      * @param tracker {@link Tracker}.
      */
     @Override
     public void execute(Input input, Tracker tracker) {
         this.ui.exit();
-    }
-
-    /**
-     * Показывает информация о действии этого класса в пункте меню.
-     *
-     * @return String действие.
-     */
-    @Override
-    public String info() {
-        return "6 - Выход из программы.";
     }
 }

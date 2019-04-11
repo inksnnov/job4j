@@ -24,5 +24,4 @@ public interface Input {
      * @return возвращаем ввод.
      */
     int ask(String question, int[] range);
-
 }

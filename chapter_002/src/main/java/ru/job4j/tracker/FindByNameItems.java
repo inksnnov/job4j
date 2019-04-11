@@ -6,16 +6,16 @@ package ru.job4j.tracker;
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
  */
-public class FindByNameItems extends FormatOut implements UserAction {
+public class FindByNameItems extends BaseAction {
 
     /**
-     * Ключ меню.
+     * Конструктор инициализирует поля key и name.
      *
-     * @return int ключ.
+     * @param key  номер пункта меню.
+     * @param name Описание пункта меню для вывода в консоль.
      */
-    @Override
-    public int key() {
-        return 4;
+    public FindByNameItems(int key, String name) {
+        super(key, name);
     }
 
     /**
@@ -24,6 +24,7 @@ public class FindByNameItems extends FormatOut implements UserAction {
      * @param input   {@link Input}.
      * @param tracker {@link Tracker}
      */
+
     @Override
     public void execute(Input input, Tracker tracker) {
         System.out.println("Поиск заявок по имени.");
@@ -32,15 +33,5 @@ public class FindByNameItems extends FormatOut implements UserAction {
         for (Item item : items) {
             super.format(item.getName(), item.getDesc());
         }
-    }
-
-    /**
-     * Показывает информация о действии этого класса в пункте меню.
-     *
-     * @return String действие.
-     */
-    @Override
-    public String info() {
-        return "4 - Поиск заявок по имени.";
     }
 }

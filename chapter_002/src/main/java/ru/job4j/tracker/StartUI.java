@@ -56,7 +56,9 @@ public class StartUI {
     }
 
     /**
-     * Точка входа в программу.
+     * Запускаем программу.
+     *
+     * @param args не используем.
      */
     public static void main(String[] args) {
         new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();

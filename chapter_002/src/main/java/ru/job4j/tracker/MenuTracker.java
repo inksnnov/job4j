@@ -51,18 +51,18 @@ public class MenuTracker {
     }
 
     /**
-     * Добавление объектов меню в список.
+     * Формирование списка объектов меню.
      *
      * @param ui {@link StartUI}.
      */
     public void fillActions(StartUI ui) {
-        this.actions.add(new AddItem());
-        this.actions.add(new ReplaceItem());
-        this.actions.add(new DeleteItem());
-        this.actions.add(new ShowAllItem());
-        this.actions.add(new FindByNameItems());
-        this.actions.add(new FindByIdItem());
-        this.actions.add(new ExitProgram(ui));
+        this.actions.add(new AddItem(0, "Добавление заявки."));
+        this.actions.add(new ReplaceItem(1, "Замена заявки."));
+        this.actions.add(new DeleteItem(2, "Удаление заявки."));
+        this.actions.add(new ShowAllItem(3, "Показать все заявки."));
+        this.actions.add(new FindByNameItems(4, "Поиск заявок по имени."));
+        this.actions.add(new FindByIdItem(5, "Поиск заявки по ID."));
+        this.actions.add(new ExitProgram(6, "Выход из программы.", ui));
     }
 
     /**

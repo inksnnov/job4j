@@ -6,16 +6,16 @@ package ru.job4j.tracker;
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
  */
-public class ShowAllItem extends FormatOut implements UserAction {
+public class ShowAllItem extends BaseAction {
 
     /**
-     * Ключ меню.
+     * Конструктор инициализирует поля key и name.
      *
-     * @return int ключ.
+     * @param key  номер пункта меню.
+     * @param name Описание пункта меню для вывода в консоль.
      */
-    @Override
-    public int key() {
-        return 3;
+    public ShowAllItem(int key, String name) {
+        super(key, name);
     }
 
     /**
@@ -31,15 +31,5 @@ public class ShowAllItem extends FormatOut implements UserAction {
         for (Item item : items) {
             super.format(item.getName(), item.getDesc());
         }
-    }
-
-    /**
-     * Показывает информация о действии этого класса в пункте меню.
-     *
-     * @return String действие.
-     */
-    @Override
-    public String info() {
-        return "3 - Показать все заявки.";
     }
 }
