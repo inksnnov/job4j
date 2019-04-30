@@ -52,7 +52,7 @@ public class ValidateInputTest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        String.format("Введите пункт меню из диапазона значений.\n")
+                        String.format("Введите пункт меню из диапазона значений.%n")
                 )
         );
     }
