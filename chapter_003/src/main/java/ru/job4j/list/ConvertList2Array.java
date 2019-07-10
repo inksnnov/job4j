@@ -39,4 +39,21 @@ public class ConvertList2Array {
         }
         return array;
     }
+
+    /**
+     * Метогд конвертирует List масивов int в ArrayList Integer
+     * с помощью двух циклов foreach.
+     *
+     * @param list List содержит массивы типа int.
+     * @return ArrayList типа Integer.
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] array : list) {
+            for (int cell : array) {
+                result.add(cell);
+            }
+        }
+        return result;
+    }
 }

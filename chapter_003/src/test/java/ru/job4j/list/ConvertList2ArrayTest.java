@@ -6,9 +6,10 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
- * Тесты к классу преобразования листа в двумерный массив.
+ * Тесты к классу преобразования листа в двумерный массив и листа массивов int в List int.
  *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
@@ -55,4 +56,19 @@ public class ConvertList2ArrayTest {
         assertThat(result, is(expect));
     }
 
+    @Test
+    public void convertListOfIntArraysList8ToList() {
+        ConvertList2Array convertList2List = new ConvertList2Array();
+        List<int[]> input = Arrays.asList(new int[]{1, 2, 3}, new int[]{4, 5, 6, 7, 8});
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+        assertThat(convertList2List.convert(input), is(expect));
+    }
+
+    @Test
+    public void convertListOfIntArraysList11ToList() {
+        ConvertList2Array convertList2List = new ConvertList2Array();
+        List<int[]> input = Arrays.asList(new int[]{1, 2, 3}, new int[]{4, 5}, new int[]{6, 7, 8, 9, 10}, new int[]{11});
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+        assertThat(convertList2List.convert(input), is(expect));
+    }
 }
