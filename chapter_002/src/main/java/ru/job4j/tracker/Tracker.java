@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Класс манипулирует объектами типа Item.
@@ -12,15 +14,9 @@ import java.util.Arrays;
 public class Tracker {
 
     /**
-     * Массив- хранилище объектов типа Item, хранит заявки.
+     * ArrayList- хранилище объектов типа Item, хранит заявки.
      */
-    private final Item[] items = new Item[100];
-
-    /**
-     * Указатель на ячейку в массиве Items,при записи в ячейку сдвигаеться на 1 вправо,
-     * при удалении на 1 влево.
-     */
-    private int position = 0;
+    private final List<Item> items = new ArrayList<>();
 
     /**
      * Метод добавления заявки(Item) в массив Items.
@@ -30,7 +26,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -43,11 +39,12 @@ public class Tracker {
      * @return возвращает true если замена прошла успешно, иначе false.
      */
     public boolean replace(String id, Item item) {
+        ListIterator<Item> iterator = this.items.listIterator();
         boolean result = false;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(id)) {
+        while (iterator.hasNext()) {
+            if (iterator.next().getId().equals(id)) {
                 item.setId(id);
-                this.items[i] = item;
+                iterator.set(item);
                 result = true;
                 break;
             }
@@ -64,12 +61,12 @@ public class Tracker {
      * @return если заявка удалена возвращает true, иначе false.
      */
     public boolean delete(String id) {
+        ListIterator<Item> iterator = this.items.listIterator();
         boolean result = false;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(id)) {
-                System.arraycopy(this.items, i + 1, this.items, i, this.items.length - i - 1);
+        while (iterator.hasNext()) {
+            if (iterator.next().getId().equals(id)) {
+                iterator.remove();
                 result = true;
-                this.position--;
                 break;
             }
         }
@@ -79,28 +76,26 @@ public class Tracker {
     /**
      * Возвращает все заявки из массива items.
      *
-     * @return Возващает массив без null элементов и без стертых заявок.
+     * @return Возващает список заявок.
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> findAll() {
+        return this.items;
     }
 
     /**
      * Поиск заявки по имени.
      *
      * @param name имя искомой заявки.
-     * @return Item[] массив заявок с искомыми именами.
+     * @return список заявок с искомыми именами.
      */
-    public Item[] findByName(String name) {
-        int count = 0;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i] != null && this.items[i].getName().equals(name)) {
-                Item tmp = this.items[count];
-                this.items[count++] = this.items[i];
-                this.items[i] = tmp;
+    public List<Item> findByName(String name) {
+        List<Item> result = new ArrayList<>();
+        for (Item item : this.items) {
+            if (item != null && item.getName().equals(name)) {
+                result.add(item);
             }
         }
-        return Arrays.copyOf(this.items, count);
+        return result;
     }
 
     /**
@@ -111,9 +106,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(id)) {
-                result = this.items[i];
+        for (Item item : this.items) {
+            if (item != null && item.getId().equals(id)) {
+                result = item;
                 break;
             }
         }

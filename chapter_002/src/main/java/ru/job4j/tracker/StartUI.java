@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Класс для работы с пользователем программы Tracker.
  *
@@ -41,7 +43,7 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions(this);
-        int[] ranges = menu.getMenuRange();
+        List<Integer> ranges = menu.getMenuRange();
         do {
             menu.show();
             menu.select(input.ask("select:", ranges));

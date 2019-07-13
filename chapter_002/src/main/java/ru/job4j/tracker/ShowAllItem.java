@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Класс вывод всех заявок.
  *
@@ -27,7 +29,7 @@ public class ShowAllItem extends BaseAction {
     @Override
     public void execute(Input input, Tracker tracker) {
         System.out.println("------------Все заявки------------");
-        Item[] items = tracker.findAll();
+        List<Item> items = tracker.findAll();
         for (Item item : items) {
             super.format(item.getName(), item.getDesc());
         }

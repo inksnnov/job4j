@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Интерфейс пользовательского ввода и иммитации ввода для тестов.
  *
@@ -23,5 +25,5 @@ public interface Input {
      * @param range    массив пунктов меню.
      * @return возвращаем ввод.
      */
-    int ask(String question, int[] range);
+    int ask(String question, List<Integer> range);
 }

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Декоратор пользовательского ввода с обработкой исключений.
  *
@@ -38,11 +40,11 @@ public class ValidateInput implements Input {
      * при неверном вводе.Служит для корректного выбора пункта меню.
      *
      * @param question String Вопрос пользователю.
-     * @param range    int[]  массив элементов меню.
+     * @param range    List список элементов меню.
      * @return int выбранный пользователем ключ меню.
      */
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         boolean invalid = true;
         int value = -1;
         do {
