@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -21,6 +22,20 @@ public class StartUITest {
 
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream stdout = new PrintStream(out);
+
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+
+        @Override
+        public String toString() {
+            return out.toString();
+        }
+    };
+
     @Before
     public void loadOutput() {
         System.setOut(new PrintStream(this.out));
@@ -35,7 +50,7 @@ public class StartUITest {
     public void createItemTestOne() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "testName", "desc", "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(tracker.findAll().get(0).getName(), is("testName"));
     }
 
@@ -61,7 +76,7 @@ public class StartUITest {
         tracker.add(itemOne);
         tracker.add(itemTwo);
         Input input = new StubInput(new String[]{"1", itemTwo.getId(), "NameThree", "DescThree", "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(tracker.findByName("NameThree").get(0).getName(), is("NameThree"));
     }
 
@@ -74,7 +89,7 @@ public class StartUITest {
         tracker.add(itemOne);
         tracker.add(itemTwo);
         Input input = new StubInput(new String[]{"2", itemTwo.getId(), "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertNull(tracker.findById(itemTwo.getId()));
     }
 
@@ -88,21 +103,19 @@ public class StartUITest {
         tracker.add(itemTwo);
         String ln = System.lineSeparator();
         Input input = new StubInput(new String[]{"3", "6"});
-        new StartUI(input, tracker).init();
-        assertThat(out.toString(), is(new StringBuilder()
+        new StartUI(input, tracker, this.output).init();
+        assertThat(this.output.toString(), is(new StringBuilder()
                 .append(this.showMenu())
                 .append("------------Все заявки------------").append(ln)
                 .append("Имя заявки :  NameOne ").append(ln)
                 .append("Описание заявки : ").append(ln)
                 .append(" DescOne ")
                 .append(ln)
-                .append(" ")
                 .append(ln)
                 .append("Имя заявки :  NameTwo ").append(ln)
                 .append("Описание заявки : ").append(ln)
                 .append(" DescTwo ")
                 .append(ln)
-                .append(" ")
                 .append(ln)
                 .append(this.showMenu())
                 .toString()
@@ -119,15 +132,14 @@ public class StartUITest {
         tracker.add(itemTwo);
         String ln = System.lineSeparator();
         Input input = new StubInput(new String[]{"4", "NameOne", "6"});
-        new StartUI(input, tracker).init();
-        assertThat(out.toString(), is(new StringBuilder()
+        new StartUI(input, tracker, this.output).init();
+        assertThat(this.output.toString(), is(new StringBuilder()
                 .append(this.showMenu())
                 .append("Поиск заявок по имени.").append(ln)
                 .append("Имя заявки :  NameOne ").append(ln)
                 .append("Описание заявки : ").append(ln)
                 .append(" DescOne ")
                 .append(ln)
-                .append(" ")
                 .append(ln)
                 .append(this.showMenu())
                 .toString()
@@ -144,15 +156,14 @@ public class StartUITest {
         tracker.add(itemTwo);
         String ln = System.lineSeparator();
         Input input = new StubInput(new String[]{"5", itemTwo.getId(), "6"});
-        new StartUI(input, tracker).init();
-        assertThat(out.toString(), is(new StringBuilder()
+        new StartUI(input, tracker, this.output).init();
+        assertThat(this.output.toString(), is(new StringBuilder()
                 .append(this.showMenu())
                 .append("Поиск заявки по ID").append(ln)
                 .append("Имя заявки :  NameTwo ").append(ln)
                 .append("Описание заявки : ").append(ln)
                 .append(" DescTwo ")
                 .append(ln)
-                .append(" ")
                 .append(ln)
                 .append(this.showMenu())
                 .toString()

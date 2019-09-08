@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Класс добавления заявки.
  *
@@ -25,12 +27,12 @@ public class AddItem extends BaseAction {
      * @param tracker {@link Tracker}
      */
     @Override
-    public void execute(Input input, Tracker tracker) {
-        System.out.println("------------Добавление новой заявки------------");
+    public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        output.accept("------------Добавление новой заявки------------");
         String name = input.ask("Введите имя заявки :");
         String desc = input.ask("Введите описание заявки :");
         Item item = new Item(name, desc, System.currentTimeMillis());
         tracker.add(item);
-        System.out.println("Заявка успешно добавлена.");
+        output.accept("Заявка успешно добавлена.");
     }
 }

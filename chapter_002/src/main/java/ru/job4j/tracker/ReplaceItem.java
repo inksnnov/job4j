@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Класс - редактирование заявки.
  *
@@ -25,16 +27,16 @@ public class ReplaceItem extends BaseAction {
      * @param tracker {@link Tracker}
      */
     @Override
-    public void execute(Input input, Tracker tracker) {
-        System.out.println("-------------Редактирование заявки------------");
+    public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        output.accept("-------------Редактирование заявки------------");
         String id = input.ask("Введите ID редактируемой заявки :");
         String name = input.ask("Введите новое имя заявки.");
         String desc = input.ask("Введите новое описание к заявке.");
         Item item = new Item(name, desc, System.currentTimeMillis());
         if (tracker.replace(id, item)) {
-            System.out.println("Заявка успешно отредактирована.");
+            output.accept("Заявка успешно отредактирована.");
         } else {
-            System.out.println("Заявка не отредактирована, попробуйте снова.");
+            output.accept("Заявка не отредактирована, попробуйте снова.");
         }
     }
 }

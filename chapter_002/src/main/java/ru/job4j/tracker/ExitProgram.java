@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Реализация класса выхода из программы.
  *
@@ -33,7 +35,7 @@ public class ExitProgram extends BaseAction {
      * @param tracker {@link Tracker}.
      */
     @Override
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, Tracker tracker, Consumer<String> output) {
         this.ui.exit();
     }
 }

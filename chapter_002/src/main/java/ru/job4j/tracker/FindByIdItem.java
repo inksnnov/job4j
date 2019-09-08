@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Класс поиск заявки по ID.
  *
@@ -25,14 +27,14 @@ public class FindByIdItem extends BaseAction {
      * @param tracker {@link Tracker}
      */
     @Override
-    public void execute(Input input, Tracker tracker) {
-        System.out.println("Поиск заявки по ID");
+    public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        output.accept("Поиск заявки по ID");
         String id = input.ask("Введите номер заявки");
         Item item = tracker.findById(id);
         if (item != null) {
-            super.format(item.getName(), item.getDesc());
+            output.accept(super.format(item.getName(), item.getDesc()));
         } else {
-            System.out.println("Заявка не найдена, укажите верный ID.");
+            output.accept("Заявка не найдена, укажите верный ID.");
         }
     }
 }

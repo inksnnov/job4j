@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Интерфейс для реализации пунктов меню как классов.
  *
@@ -21,7 +23,7 @@ public interface UserAction {
      * @param input   {@link Input}.
      * @param tracker {@link Tracker}.
      */
-    void execute(Input input, Tracker tracker);
+    void execute(Input input, Tracker tracker, Consumer<String> output);
 
     /**
      * Описание пункта меню.

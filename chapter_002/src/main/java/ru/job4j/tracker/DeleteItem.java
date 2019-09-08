@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Класс удаления заявки.
  *
@@ -25,13 +27,13 @@ public class DeleteItem extends BaseAction {
      * @param tracker {@link Tracker}
      */
     @Override
-    public void execute(Input input, Tracker tracker) {
-        System.out.println("------------Удаление заявки------------");
+    public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        output.accept("------------Удаление заявки------------");
         String id = input.ask("Введите ID удаляемой заявки.");
         if (tracker.delete(id)) {
-            System.out.println("Заявка удалена.");
+            output.accept("Заявка удалена.");
         } else {
-            System.out.println("Заявка не удалена, попробуйте снова.");
+            output.accept("Заявка не удалена, попробуйте снова.");
         }
     }
 }

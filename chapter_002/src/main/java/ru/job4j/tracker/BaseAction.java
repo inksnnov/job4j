@@ -55,9 +55,11 @@ public abstract class BaseAction implements UserAction {
      * @param name {@link Item#getName()}.
      * @param desc {@link Item#getDesc()}.
      */
-    void format(String name, String desc) {
+    String format(String name, String desc) {
         String ln = System.lineSeparator();
-        System.out.printf("%s %s %s", "Имя заявки : ", name, ln);
-        System.out.printf("%s %s %s %s %s", "Описание заявки :", ln, desc, ln, ln);
+        StringBuilder result = new StringBuilder()
+                .append(String.format("%s %s %s", "Имя заявки : ", name, ln))
+                .append(String.format("%s %s %s %s", "Описание заявки :", ln, desc, ln));
+        return result.toString();
     }
 }
