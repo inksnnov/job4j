@@ -41,7 +41,7 @@ public class ProfilesTest {
     @Test
     public void collectAddressTestOne() {
         List<Address> result = profiles.collect(profileList);
-        assertThat(result.size(), is(10));
+        assertThat(result.size(), is(13));
     }
 
     @Test

@@ -33,12 +33,11 @@ public class Profiles {
      */
     public List<Address> collectUniqueSort(List<Profile> profile) {
         return profile.stream()
-                .distinct()
-                .sorted((x, y) -> (
-                        x.getAddress().getCity()
-                                .compareToIgnoreCase(y.getAddress().getCity())
-                ))
                 .map(Profile::getAddress)
+                .sorted(
+                        (x, y) -> x.getCity().compareToIgnoreCase(y.getCity()))
+                .distinct()
                 .collect(Collectors.toList());
+
     }
 }
