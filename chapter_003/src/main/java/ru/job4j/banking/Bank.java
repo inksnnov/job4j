@@ -86,12 +86,11 @@ public class Bank {
      * @return список объектов Account относящихся к данному пользователю.
      */
     public List<Account> getUserAccounts(String passport) {
-        List<Account> result = new ArrayList<>();
-        User user = findUsrByPass(passport);
-        if (user != null) {
-            result = this.userDB.get(user);
-        }
-        return result;
+        return this.userDB.entrySet().stream()
+                .filter(x -> x.getKey().getPassport().equals(passport))
+                .map(Map.Entry::getValue)
+                .findAny()
+                .orElse(new ArrayList<>());
     }
 
     /**
@@ -129,15 +128,11 @@ public class Bank {
      * @return найденный User, иначе new User("0", "0").
      */
     private User findUsrByPass(String passport) {
-        User result = null;
-        Set<Map.Entry<User, ArrayList<Account>>> entrySet = this.userDB.entrySet();
-        for (Map.Entry<User, ArrayList<Account>> map : entrySet) {
-            if (map.getKey().getPassport().equals(passport)) {
-                result = map.getKey();
-                break;
-            }
-        }
-        return result;
+        return this.userDB.keySet()
+                .stream()
+                .filter(x -> x.getPassport().equals(passport))
+                .findAny()
+                .orElse(null);
     }
 
     /**
@@ -148,14 +143,10 @@ public class Bank {
      * @return индекс найденного счета в List<Account>, иначе вернет -1.
      */
     private Account findAccount(User user, String requisite) {
-        Account result = null;
-        for (Account account : this.userDB.get(user)) {
-            if (account.getRequisites().equals(requisite)) {
-                result = account;
-                break;
-            }
-        }
-        return result;
-
+        return this.userDB.get(user)
+                .stream()
+                .filter(x -> x.getRequisites().equals(requisite))
+                .findAny()
+                .orElse(null);
     }
 }
