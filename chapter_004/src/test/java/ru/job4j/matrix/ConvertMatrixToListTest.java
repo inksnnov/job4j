@@ -1,4 +1,4 @@
-package ru.job4j.matrixConvert;
+package ru.job4j.matrix;
 
 import org.junit.Test;
 

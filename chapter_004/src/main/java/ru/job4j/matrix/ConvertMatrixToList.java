@@ -1,7 +1,6 @@
-package ru.job4j.matrixConvert;
+package ru.job4j.matrix;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
