@@ -13,33 +13,32 @@ import static org.junit.Assert.assertThat;
  */
 public class PriorityQueueTest {
 
+    private PriorityQueue queue = new PriorityQueue();
+
     @Test
     public void whenHigherPriorityOne() {
-        PriorityQueue queue = new PriorityQueue();
-        queue.put(new Task("low", 5));
-        queue.put(new Task("urgent", 1));
-        queue.put(new Task("middle", 3));
-        assertThat(queue.take().getDesc(), is("urgent"));
+        this.queue.put(new Task("low", 5));
+        this.queue.put(new Task("urgent", 1));
+        this.queue.put(new Task("middle", 3));
+        assertThat(this.queue.take().getDesc(), is("urgent"));
     }
 
     @Test
     public void whenHigherPriorityTwo() {
-        PriorityQueue queue = new PriorityQueue();
-        queue.put(new Task("urgent", 1));
-        queue.put(new Task("low", 5));
-        queue.put(new Task("urgent", 1));
-        queue.put(new Task("middle", 3));
-        assertThat(queue.take().getDesc(), is("urgent"));
+        this.queue.put(new Task("urgent", 1));
+        this.queue.put(new Task("low", 5));
+        this.queue.put(new Task("urgent", 1));
+        this.queue.put(new Task("middle", 3));
+        assertThat(this.queue.take().getDesc(), is("urgent"));
     }
 
     @Test
     public void whenHigherPriorityThree() {
-        PriorityQueue queue = new PriorityQueue();
-        queue.put(new Task("low", 5));
-        queue.put(new Task("low", 5));
-        queue.put(new Task("middle", 3));
-        queue.put(new Task("urgent", 1));
-        queue.take();
-        assertThat(queue.take().getDesc(), is("middle"));
+        this.queue.put(new Task("low", 5));
+        this.queue.put(new Task("low", 5));
+        this.queue.put(new Task("middle", 3));
+        this.queue.put(new Task("urgent", 1));
+        this.queue.take();
+        assertThat(this.queue.take().getDesc(), is("middle"));
     }
 }

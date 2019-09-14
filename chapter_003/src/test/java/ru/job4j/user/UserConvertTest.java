@@ -1,5 +1,6 @@
 package ru.job4j.user;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -15,46 +16,51 @@ import static org.hamcrest.core.Is.is;
  */
 public class UserConvertTest {
 
+    private UserConvert convert = new UserConvert();
+
+    private List<User> input;
+
+    @Before
+    public void load() {
+        this.input = new ArrayList<>(List.of(
+                new User("Alexey", "Moscow"),
+                new User("Ivan", "Novgorod"),
+                new User("Oleg", "Omsk"),
+                new User("Max", "Sarov"),
+                new User("Igor", "Sochi")));
+    }
+
     @Test
     public void processTestLength5() {
-        UserConvert convert = new UserConvert();
-        User user1 = new User("Alexey", "Moscow");
-        User user2 = new User("Ivan", "Novgorod");
-        User user3 = new User("Oleg", "Omsk");
-        User user4 = new User("Max", "Sarov");
-        User user5 = new User("Igor", "Sochi");
-        List<User> input = new ArrayList<>(Arrays.asList(user1, user2, user3, user4, user5));
-        HashMap<Long, User> expect = new HashMap<>();
-        expect.put(user1.getId(), user1);
-        expect.put(user2.getId(), user2);
-        expect.put(user3.getId(), user3);
-        expect.put(user4.getId(), user4);
-        expect.put(user5.getId(), user5);
-        assertThat(convert.process(input), is(expect));
+        Map<Long, User> expect = Map.of(
+                this.input.get(0).getId(), this.input.get(0),
+                this.input.get(1).getId(), this.input.get(1),
+                this.input.get(2).getId(), this.input.get(2),
+                this.input.get(3).getId(), this.input.get(3),
+                this.input.get(4).getId(), this.input.get(4));
+        assertThat(this.convert.process(this.input), is(expect));
     }
 
     @Test
     public void processTestLength4() {
-        UserConvert convert = new UserConvert();
-        User user1 = new User("Alexey", "Moscow");
-        User user2 = new User("Ivan", "Novgorod");
-        User user3 = new User("Oleg", "Omsk");
-        User user4 = new User("Max", "Sarov");
-        List<User> input = new ArrayList<>(Arrays.asList(user1, user2, user3, user4));
-        HashMap<Long, User> expect = new HashMap<>();
-        expect.put(user1.getId(), user1);
-        expect.put(user2.getId(), user2);
-        expect.put(user3.getId(), user3);
-        expect.put(user4.getId(), user4);
-        assertThat(convert.process(input), is(expect));
+        List<User> inputFour = Arrays.asList(
+                this.input.get(0),
+                this.input.get(1),
+                this.input.get(2),
+                this.input.get(3));
+        Map<Long, User> expect = Map.of(
+                this.input.get(0).getId(), this.input.get(0),
+                this.input.get(1).getId(), this.input.get(1),
+                this.input.get(2).getId(), this.input.get(2),
+                this.input.get(3).getId(), this.input.get(3));
+        assertThat(this.convert.process(inputFour), is(expect));
     }
 
     @Test
     public void processTestLengthNone() {
-        UserConvert convert = new UserConvert();
-        List<User> input = new ArrayList<>();
+        List<User> inputNone = new ArrayList<>();
         HashMap<Long, User> expect = new HashMap<>();
-        assertThat(convert.process(input), is(expect));
+        assertThat(this.convert.process(inputNone), is(expect));
     }
 
 

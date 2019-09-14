@@ -2,7 +2,8 @@ package ru.job4j.user;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Конвертация List<User> в Map<Long, User>.
@@ -21,12 +22,8 @@ public class UserConvert {
      * @return сконвертированный Map.
      */
     public HashMap<Long, User> process(List<User> list) {
-        HashMap<Long, User> result = new HashMap<>();
-        ListIterator<User> userIterator = list.listIterator();
-        while (userIterator.hasNext()) {
-            User user = userIterator.next();
-            result.put(user.getId(), user);
-        }
-        return result;
+        return list.stream()
+                .collect(Collectors.toMap(User::getId, Function.identity(),
+                        (oldValue, newValue) -> newValue, HashMap::new));
     }
 }

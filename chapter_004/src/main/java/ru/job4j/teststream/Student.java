@@ -6,7 +6,7 @@ import java.util.Comparator;
  * Класс студент.
  *
  * @author Alexandr Khomichevskiy.
- * @version 1.0.
+ * @version 1.0
  */
 public class Student implements Comparator<Student> {
 

@@ -1,7 +1,8 @@
 package ru.job4j.list;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * класс преобразования двумерного массива в ArrayList.
@@ -19,12 +20,9 @@ public class ConvertMatrix2List {
      * @return сконвертированный ArrayList.
      */
     public List<Integer> toList(int[][] array) {
-        List<Integer> list = new ArrayList<>();
-        for (int[] result : array) {
-            for (int cell : result) {
-                list.add(cell);
-            }
-        }
-        return list;
+        return Arrays.stream(array)
+                .flatMapToInt(Arrays::stream)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

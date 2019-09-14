@@ -1,5 +1,8 @@
 package ru.job4j.user;
 
+import java.util.Objects;
+import java.util.Random;
+
 /**
  * Класс пользователя.
  *
@@ -69,6 +72,26 @@ public class User {
      * @return Long id.
      */
     private Long generateId() {
-        return System.currentTimeMillis();
+        Random random = new Random();
+        return System.currentTimeMillis() + random.nextInt();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return id.equals(user.id)
+                && Objects.equals(name, user.name)
+                && Objects.equals(city, user.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, city);
     }
 }

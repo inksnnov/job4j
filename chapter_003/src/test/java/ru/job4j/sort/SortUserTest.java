@@ -40,40 +40,40 @@ public class SortUserTest {
 
     @Test
     public void userCompareOneTestByAllFields() {
-        List<User> input = new ArrayList<>();
-        input.add(new User("A", 20));
-        input.add(new User("A", 15));
-        input.add(new User("B", 20));
+        List<User> input = new ArrayList<>(List.of(
+                new User("A", 20),
+                new User("A", 15),
+                new User("B", 20)));
         new SortUser().sortByAllFields(input);
         assertThat(input.get(0).getAge(), is(15));
     }
 
     @Test
     public void userCompareTwoTestByAllFields() {
-        List<User> input = new ArrayList<>();
-        input.add(new User("B", 20));
-        input.add(new User("A", 25));
-        input.add(new User("B", 20));
+        List<User> input = new ArrayList<>(List.of(
+                new User("B", 20),
+                new User("A", 25),
+                new User("B", 20)));
         new SortUser().sortByAllFields(input);
         assertThat(input.get(0).getAge(), is(25));
     }
 
     @Test
     public void userCompareOneTestByNameLength() {
-        List<User> input = new ArrayList<>();
-        input.add(new User("BA", 10));
-        input.add(new User("A", 25));
-        input.add(new User("BAAA", 20));
+        List<User> input = new ArrayList<>(List.of(
+                new User("BA", 10),
+                new User("A", 25),
+                new User("BAAA", 20)));
         new SortUser().sortNameLength(input);
         assertThat(input.get(0).getAge(), is(25));
     }
 
     @Test
     public void userCompareTwoTestByNameLength() {
-        List<User> input = new ArrayList<>();
-        input.add(new User("BAAAA", 10));
-        input.add(new User("AAAAAA", 25));
-        input.add(new User("BAAA", 20));
+        List<User> input = new ArrayList<>(List.of(
+                new User("BAAAA", 10),
+                new User("AAAAAA", 25),
+                new User("BAAA", 20)));
         new SortUser().sortNameLength(input);
         assertThat(input.get(0).getAge(), is(20));
     }

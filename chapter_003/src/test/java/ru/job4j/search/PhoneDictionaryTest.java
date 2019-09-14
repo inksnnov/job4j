@@ -15,29 +15,28 @@ import static org.junit.Assert.*;
  */
 public class PhoneDictionaryTest {
 
+    private PhoneDictionary phones = new PhoneDictionary();
+
     @Test
     public void findTestOne() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(new Person("Petr", "Arsentev", "534872", "Bryansk"));
-        List<Person> persons = phones.find("petr");
+        this.phones.add(new Person("Petr", "Arsentev", "534872", "Bryansk"));
+        List<Person> persons = this.phones.find("petr");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }
 
     @Test
     public void findTestTwo() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(new Person("Petr", "Arsentev", "534872", "Bryansk"));
-        phones.add(new Person("Ivan", "Ivanov", "12345678", "Moscow"));
-        List<Person> persons = phones.find("12345678");
+        this.phones.add(new Person("Petr", "Arsentev", "534872", "Bryansk"));
+        this.phones.add(new Person("Ivan", "Ivanov", "12345678", "Moscow"));
+        List<Person> persons = this.phones.find("12345678");
         assertThat(persons.iterator().next().getName(), is("Ivan"));
     }
 
     @Test
     public void findTestThree() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(new Person("Petr", "Arsentev", "534872", "Bryansk"));
-        phones.add(new Person("Ivan", "Ivanov", "12345678", "Moscow"));
-        List<Person> persons = phones.find("32");
+        this.phones.add(new Person("Petr", "Arsentev", "534872", "Bryansk"));
+        this.phones.add(new Person("Ivan", "Ivanov", "12345678", "Moscow"));
+        List<Person> persons = this.phones.find("32");
         assertTrue(persons.isEmpty());
     }
 }
