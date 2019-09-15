@@ -1,7 +1,6 @@
 package ru.job4j.search;
 
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 /**
  * Очередь с приоритетом на LinkedList.
@@ -23,7 +22,7 @@ public class PriorityQueue {
      * @param task Задание.
      */
     public void put(Task task) {
-        ListIterator<Task> iter = this.tasks.listIterator();
+        var iter = this.tasks.listIterator();
         if (this.tasks.isEmpty()) {
             this.tasks.add(task);
         } else if (task.getPriority() >= this.tasks.getLast().getPriority()) {

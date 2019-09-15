@@ -2,6 +2,7 @@ package ru.job4j.search;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Класс реализация поиска по телефонному справочнику.
@@ -32,15 +33,11 @@ public class PhoneDictionary {
      * иначе возвращает пустой ArrayList.
      */
     public List<Person> find(String key) {
-        List<Person> result = new ArrayList<>();
-        for (Person person : persons) {
-            if (key.length() >= 3 && (person.getAddress().toLowerCase().contains(key.toLowerCase())
-                    || person.getName().toLowerCase().contains(key.toLowerCase())
-                    || person.getPhone().toLowerCase().contains(key.toLowerCase())
-                    || person.getSurname().toLowerCase().contains(key.toLowerCase()))) {
-                result.add(person);
-            }
-        }
-        return result;
+        return persons.stream()
+                .filter(person -> key.length() >= 3 && (person.getAddress().toLowerCase().contains(key.toLowerCase())
+                        || person.getName().toLowerCase().contains(key.toLowerCase())
+                        || person.getPhone().toLowerCase().contains(key.toLowerCase())
+                        || person.getSurname().toLowerCase().contains(key.toLowerCase())))
+                .collect(Collectors.toList());
     }
 }
