@@ -20,7 +20,7 @@ public class StoreTest {
 
     @Before
     public void load() {
-        store = new UserStore<>(10);
+        store = new UserStore(10);
         store.add(new User("0001"));
         store.add(new User("0002"));
         store.add(new User("0003"));
