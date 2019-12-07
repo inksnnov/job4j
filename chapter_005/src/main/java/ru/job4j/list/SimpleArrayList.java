@@ -24,7 +24,9 @@ public class SimpleArrayList<E> {
      */
     public E delete() {
         E temp = first.data;
+        Node<E> oldLink = first;
         first = first.next;
+        oldLink.next = null;
         size--;
         return temp;
     }
