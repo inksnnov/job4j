@@ -1,6 +1,4 @@
 /**
- * Пакет для работы со списками.
- *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
  */
