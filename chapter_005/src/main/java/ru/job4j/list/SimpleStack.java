@@ -14,7 +14,7 @@ public class SimpleStack<T> {
      */
     private LinkedContainer<T> container;
     /**
-     *  Размер списка.
+     * Размер списка.
      */
     private int size;
 
@@ -48,5 +48,14 @@ public class SimpleStack<T> {
     public void push(T value) {
         container.add(value);
         size++;
+    }
+
+    /**
+     * ПУстая ли коллекция?
+     *
+     * @return true если пустая, иначе false.
+     */
+    boolean isEmpty() {
+        return size == 0;
     }
 }
