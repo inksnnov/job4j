@@ -53,7 +53,7 @@ public class SimpleStack<T> {
     /**
      * ПУстая ли коллекция?
      *
-     * @return true если пустая, иначе false.
+     * @return true если пустая, иначе false
      */
     boolean isEmpty() {
         return size == 0;

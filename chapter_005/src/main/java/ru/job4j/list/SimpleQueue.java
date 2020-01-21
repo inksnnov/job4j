@@ -1,7 +1,7 @@
 package ru.job4j.list;
 
 /**
- * Реализация очереди на двух стеках.
+ * Реализация очереди на двух стеках
  *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.

@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
 
 /**
- * Тесты к классу SimpleQueue.
+ * Тесты к классу SimpleQueue
  *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
