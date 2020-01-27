@@ -27,7 +27,7 @@ public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
     /**
      * Коофицент загрузки массива table.
      */
-    private final float load_factor;
+    private final float loadFactor;
     /**
      * Количество элементов в массиве table.
      */
@@ -58,34 +58,34 @@ public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
      * перед расширением.
      * DEFAULT_CAPACITY = 16.
      *
-     * @param load_factor float коофицент заполнения.
+     * @param loadFactor float коофицент заполнения.
      */
-    public HashMap(float load_factor) {
-        this(0, load_factor);
+    public HashMap(float loadFactor) {
+        this(0, loadFactor);
     }
 
     /**
      * Конструктор позволяет установить значения коофицента
      * заполнения и начального размера массива table.
      *
-     * @param capacity    int начальный размер массива table.
-     * @param load_factor float коофицент заполнения.
+     * @param capacity   int начальный размер массива table.
+     * @param loadFactor float коофицент заполнения.
      * @throws IllegalArgumentException - выкидывает если
      *                                  значение load_factor вне
      *                                  диапазона 0.1 - 1 или
      *                                  capacity < 0.
      */
-    public HashMap(int capacity, float load_factor) {
-        if (load_factor <= 0 || load_factor > 1F) {
-            throw new IllegalArgumentException("Не верное значение " +
-                    "коофицента заполнения.");
+    public HashMap(int capacity, float loadFactor) {
+        if (loadFactor <= 0 || loadFactor > 1F) {
+            throw new IllegalArgumentException("Не верное значение "
+                    + "коофицента заполнения.");
         }
         if (capacity < 0) {
-            throw new IllegalArgumentException("Не верное значение " +
-                    "размера коллекции.");
+            throw new IllegalArgumentException("Не верное значение "
+                    + "размера коллекции.");
         }
         table = new Object[DEFAULT_CAPACITY + capacity];
-        this.load_factor = load_factor;
+        this.loadFactor = loadFactor;
     }
 
     /**
@@ -175,7 +175,7 @@ public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
      * исходя из коофицента загрузки.
      */
     private void checkResize() {
-        if (size == Math.round(table.length * load_factor)) {
+        if (size == Math.round(table.length * loadFactor)) {
             resize();
         }
     }
@@ -237,8 +237,8 @@ public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
             @Override
             public boolean hasNext() {
                 if (modCount != size) {
-                    throw new ConcurrentModificationException("Обнаружены изменения" +
-                            "в коллекции.");
+                    throw new ConcurrentModificationException("Обнаружены изменения"
+                            + "в коллекции.");
                 }
                 boolean result = false;
                 for (int i = position; i < table.length; i++) {
