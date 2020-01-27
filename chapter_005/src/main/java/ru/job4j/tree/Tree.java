@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Реализация простейшего дерева.
@@ -49,19 +50,39 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
-     * Поиск по дереву в ширину.
+     * Поиск значения в дереве.
      *
      * @param value E значение.
-     * @return Optional<Node < E>> искомый узел.
+     * @return нода с искомым значением.
      */
     @Override
     public Optional<Node<E>> findBy(E value) {
+        return find(eNode -> eNode.eqValue(value));
+    }
+
+    /**
+     * Метод проверяет являеться ли дерево бинарным.
+     *
+     * @return true яляеться, иначе нет.
+     */
+    public boolean isBinary() {
+        return find((eNode -> eNode.leaves().size() > 2)).isEmpty();
+    }
+
+    /**
+     * Универсальый метод поиска по дереву в ширину
+     * по предикату.
+     *
+     * @param predicate предикат.
+     * @return Нода и искомым значением.
+     */
+    private Optional<Node<E>> find(Predicate<Node<E>> predicate) {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.eqValue(value)) {
+            if (predicate.test(el)) {
                 rsl = Optional.of(el);
                 break;
             }
