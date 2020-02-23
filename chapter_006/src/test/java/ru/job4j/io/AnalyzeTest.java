@@ -45,8 +45,6 @@ public class AnalyzeTest {
                 "10:57:01;10:59:01" + ln +
                         "11:01:02;11:02:02" + ln
         ));
-        log.deleteOnExit();
-        result.deleteOnExit();
     }
 
     @Test
@@ -71,8 +69,6 @@ public class AnalyzeTest {
                 "10:57:01;10:59:01" + ln +
                         "11:01:02;11:02:02" + ln
         ));
-        log.deleteOnExit();
-        result.deleteOnExit();
     }
 
     @Test
@@ -96,8 +92,6 @@ public class AnalyzeTest {
         assertThat(content.toString(), is(
                 "10:57:01;10:59:01" + ln
         ));
-        log.deleteOnExit();
-        result.deleteOnExit();
     }
 
     private File data(String file, String... properties) throws IOException {
