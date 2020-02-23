@@ -1,6 +1,8 @@
 package ru.job4j.io;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
 import java.util.stream.Stream;
@@ -17,6 +19,9 @@ import static org.hamcrest.Matchers.is;
 public class AnalyzeTest {
     String ln = System.lineSeparator();
     Analyze analyze = new Analyze();
+
+    @Rule
+    public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
     @Test
     public void analyzeTestOne() throws IOException {
@@ -96,8 +101,8 @@ public class AnalyzeTest {
     }
 
     private File data(String file, String... properties) throws IOException {
-        File patch = new File(System.getProperty("java.io.tmpdir"), file);
-        if (!patch.createNewFile()) {
+        File patch = temporaryFolder.newFile(file);
+        if (!patch.exists()) {
             throw new IllegalStateException(
                     String.format("File could not create %s", patch.getAbsolutePath())
             );
