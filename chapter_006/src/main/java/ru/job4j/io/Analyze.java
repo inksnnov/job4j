@@ -16,13 +16,13 @@ public class Analyze {
      * Если не находит 200 или 300 после 400 или 500,
      * пару не записывает.
      *
-     * @param in  Входной файл для анализа.
-     * @param out Результат анализа.
+     * @param in Входной файл для анализа.
+     * @return String Результат анализа.
      */
-    public void unavailable(File in, File out) {
+    public String unavailable(File in) {
+        StringBuilder result = new StringBuilder();
         boolean cursor = true;
-        try (BufferedReader reader = new BufferedReader(new FileReader(in));
-             PrintWriter writer = new PrintWriter(new FileWriter(out), true)) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(in))) {
             String str = reader.readLine();
             String tmp = "";
             while (str != null) {
@@ -32,10 +32,23 @@ public class Analyze {
                 }
                 if (!cursor && (str.startsWith("200") || str.startsWith("300"))) {
                     cursor = true;
-                    writer.println(tmp.strip() + ";" + str.substring(4).strip());
+                    result.append(tmp.strip()).
+                            append(";").
+                            append(str.substring(4).strip()).
+                            append(System.lineSeparator());
                 }
                 str = reader.readLine();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
+
+    public void writeResult(String text, File output) {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter(output))) {
+            br.write(text);
+            br.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

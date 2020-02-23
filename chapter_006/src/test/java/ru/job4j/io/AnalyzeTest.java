@@ -15,10 +15,11 @@ import static org.hamcrest.Matchers.is;
  * @version 1.0.
  */
 public class AnalyzeTest {
+    String ln = System.lineSeparator();
+    Analyze analyze = new Analyze();
 
     @Test
     public void analyzeTestOne() throws IOException {
-        String ln = System.lineSeparator();
         File log = data(
                 "server.log",
                 "200 10:56:01",
@@ -28,11 +29,11 @@ public class AnalyzeTest {
                 "500 11:01:02",
                 "200 11:02:02");
         File result = data("output.log", "");
-        new Analyze().unavailable(log, result);
+        analyze.writeResult(analyze.unavailable(log), result);
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(result))) {
             reader.lines().forEach(
-                    str -> content.append(str).append(System.lineSeparator())
+                    str -> content.append(str).append(ln)
             );
         }
         assertThat(content.toString(), is(
@@ -45,7 +46,6 @@ public class AnalyzeTest {
 
     @Test
     public void analyzeTestTwo() throws IOException {
-        String ln = System.lineSeparator();
         File log = data(
                 "serverTwo.log",
                 "200 10:56:01", ln,
@@ -55,11 +55,11 @@ public class AnalyzeTest {
                 "500 11:01:02", ln,
                 "200 11:02:02");
         File result = data("outputTwo.log", "");
-        new Analyze().unavailable(log, result);
+        analyze.writeResult(analyze.unavailable(log), result);
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(result))) {
             reader.lines().forEach(
-                    str -> content.append(str).append(System.lineSeparator())
+                    str -> content.append(str).append(ln)
             );
         }
         assertThat(content.toString(), is(
@@ -72,7 +72,6 @@ public class AnalyzeTest {
 
     @Test
     public void analyzeTestThree() throws IOException {
-        String ln = System.lineSeparator();
         File log = data(
                 "serverThree.log",
                 "200 10:56:01", ln,
@@ -82,11 +81,11 @@ public class AnalyzeTest {
                 "500 11:01:02", ln
         );
         File result = data("outputThree.log", "");
-        new Analyze().unavailable(log, result);
+        analyze.writeResult(analyze.unavailable(log), result);
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(result))) {
             reader.lines().forEach(
-                    str -> content.append(str).append(System.lineSeparator())
+                    str -> content.append(str).append(ln)
             );
         }
         assertThat(content.toString(), is(
