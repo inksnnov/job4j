@@ -29,7 +29,7 @@ public class SearchTest {
         File root = loadStructure();
         List<File> result = new Search().files(
                 root.getAbsolutePath(),
-                Collections.singletonList("xml")
+                str -> str.endsWith("xml")
         );
         assertTrue(result.stream().allMatch(file -> file.getName().endsWith("xml")));
         assertEquals(3, result.size());
@@ -40,7 +40,7 @@ public class SearchTest {
         File root = loadStructure();
         List<File> result = new Search().files(
                 root.getAbsolutePath(),
-                Collections.singletonList("txt")
+                str -> str.endsWith("txt")
         );
         assertTrue(result.stream().allMatch(file -> file.getName().endsWith("txt")));
         assertEquals(1, result.size());
@@ -51,28 +51,28 @@ public class SearchTest {
         File root = loadStructure();
         List<File> result = new Search().files(
                 root.getAbsolutePath(),
-                Arrays.asList("txt", "log")
+                str -> str.endsWith("txt") || str.endsWith("log")
         );
         assertTrue(
                 result.stream()
                         .map(File::getName)
-                        .allMatch(name -> name.endsWith("log") ||
-                                name.endsWith("txt")));
+                        .allMatch(name -> name.endsWith("log")
+                                || name.endsWith("txt")));
         assertEquals(2, result.size());
     }
 
     private File loadStructure() throws IOException {
         File root = temporaryFolder.newFolder();
         String path = root.getPath();
-        if (!(new File(root, "test.xml").createNewFile() &&
-                new File(path + fs + "set").mkdir() &&
-                new File(path + fs + "set", "tree.xml").createNewFile() &&
-                new File(path + fs + "get").mkdir() &&
-                new File(path + fs + "get", "server.log").createNewFile() &&
-                new File(path + fs + "get" + fs + "test").mkdir() &&
-                new File(path + fs + "get" + fs + "test", "config.txt").createNewFile() &&
-                new File(path + fs + "get" + fs + "test", "settings.xml").createNewFile() &&
-                new File(path + fs + "get", "index.html").createNewFile()
+        if (!(new File(root, "test.xml").createNewFile()
+                && new File(path + fs + "set").mkdir()
+                && new File(path + fs + "set", "tree.xml").createNewFile()
+                && new File(path + fs + "get").mkdir()
+                && new File(path + fs + "get", "server.log").createNewFile()
+                && new File(path + fs + "get" + fs + "test").mkdir()
+                && new File(path + fs + "get" + fs + "test", "config.txt").createNewFile()
+                && new File(path + fs + "get" + fs + "test", "settings.xml").createNewFile()
+                && new File(path + fs + "get", "index.html").createNewFile()
         )) {
             throw new IllegalStateException("Files and directory not created" + root.getAbsolutePath());
         }

@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Поиск в указанном каталоге и подкаталогах файлов по расширению.
@@ -16,10 +17,10 @@ public class Search {
      * алгоритм поиска в ширину.
      *
      * @param parent родительский каталог.
-     * @param exist  расширения искомых файлов.
+     * @param pr     предикат, для отборки по условию.
      * @return Список найденных файлов.
      */
-    public List<File> files(String parent, List<String> exist) {
+    public List<File> files(String parent, Predicate<String> pr) {
         File root = new File(parent);
         File[] tmp = root.listFiles();
         List<File> result = new ArrayList<>();
@@ -30,11 +31,8 @@ public class Search {
         while (!dataList.isEmpty()) {
             File data = dataList.poll();
             if (data.isFile()) {
-                for (String end : exist) {
-                    if (data.getName().endsWith(end)) {
-                        result.add(data);
-                        break;
-                    }
+                if (pr.test(data.getName())) {
+                    result.add(data);
                 }
             } else if (data.isDirectory()) {
                 tmp = data.listFiles();
