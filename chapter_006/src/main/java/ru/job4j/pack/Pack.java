@@ -8,14 +8,31 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
+ * Архиватор файлов.
+ *
  * @author Alexandr Khomichevskiy.
  * @version 1.0.
  */
 public class Pack {
+    /**
+     * Путь архивации.
+     */
     private Path sourcePath;
+    /**
+     * Путь целевого архива.
+     */
     private Path output;
+    /**
+     * Расширения файлов которые не будут включены
+     * в архив.
+     */
     private final List<String> exclude = new ArrayList<>();
 
+    /**
+     * Точка входа в программу.
+     *
+     * @param args параметры командной строки.
+     */
     public static void main(String[] args) {
         Pack pack = new Pack();
         pack.parseArgs(args);
@@ -23,6 +40,15 @@ public class Pack {
         zipper.start();
     }
 
+    /**
+     * Метод парсит переданные аргументы командной строки.
+     * Аргументы расширений файлов могут передаваться пустыми,
+     * тогда в архив включаются все файлы.
+     * Метод проверяет, является ли каталогом и действующим
+     * путь архивации.
+     *
+     * @param args аргументы командной строки.
+     */
     private void parseArgs(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException("Please enter arguments.");
@@ -35,7 +61,8 @@ public class Pack {
             throw new IllegalArgumentException("Invalid source path.");
         } else if (o == argument.size() - 1) {
             throw new IllegalArgumentException("Invalid output path");
-        } else if (Files.isDirectory(Paths.get(argument.get(d + 1)))) {
+        } else if (!Files.isDirectory(Paths.get(argument.get(d + 1)))
+                && !Files.exists(Paths.get(argument.get(d + 1)))) {
             throw new IllegalArgumentException("No such folder");
         }
         sourcePath = Paths.get(argument.get(d + 1));
@@ -43,6 +70,13 @@ public class Pack {
         output = Paths.get(argument.get(argument.size() - 1));
     }
 
+    /**
+     * Правило отбора файлов которые не будут включены
+     * в архив.
+     * Данный предикат проверяет конец имени файлов.
+     *
+     * @return Predicate<String>.
+     */
     private Predicate<String> predicate() {
         return s -> {
             boolean result = true;
