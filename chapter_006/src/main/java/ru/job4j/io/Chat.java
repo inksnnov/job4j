@@ -42,7 +42,7 @@ public class Chat {
     }
 
     /**
-     * Основной метод, запусающий чат, он же пишет лог
+     * Основной метод, запускающий чат, он же пишет лог
      * в файл log.
      */
     public void start() {
@@ -65,7 +65,7 @@ public class Chat {
      * в нее на основании BiConsumer'a.
      *
      * @param biConsumer Вывод в консоль.
-     * @throws IOException может кидат исключение
+     * @throws IOException может кидать исключение
      *                     связанное с выдачей рандомных слов.
      */
     private void chat(BiConsumer<String, Boolean> biConsumer) throws IOException {
@@ -74,8 +74,9 @@ public class Chat {
         boolean exit = false;
         String answer;
         do {
-            System.out.print(("Введите сообщение:"));
-            biConsumer.accept(answer = scanner.nextLine(), false);
+            System.out.print("Введите сообщение:");
+            answer = scanner.nextLine();
+            biConsumer.accept(answer, false);
             if (answer.toLowerCase().equals("стоп")) {
                 mute = true;
             } else if (answer.toLowerCase().equals("продолжить")) {
@@ -95,7 +96,7 @@ public class Chat {
      * при условии одна строка - одно слово.
      * Берем рандомное long число
      * от 0 до dbInput.length().
-     * Ставим позицию в файле на рандомное число.
+     * Ставим позицию в файле на рандомную позицию.
      * Если позиция не нулевая делаем readLine для
      * корректного перехода на новую строку,
      * зачем считываем строку до символа возврата каретки

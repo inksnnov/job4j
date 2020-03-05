@@ -42,8 +42,8 @@ public class AnalyzeTest {
             );
         }
         assertThat(content.toString(), is(
-                "10:57:01;10:59:01" + ln +
-                        "11:01:02;11:02:02" + ln
+                "10:57:01;10:59:01" + ln
+                        + "11:01:02;11:02:02" + ln
         ));
     }
 
@@ -66,8 +66,8 @@ public class AnalyzeTest {
             );
         }
         assertThat(content.toString(), is(
-                "10:57:01;10:59:01" + ln +
-                        "11:01:02;11:02:02" + ln
+                "10:57:01;10:59:01" + ln
+                        + "11:01:02;11:02:02" + ln
         ));
     }
 
